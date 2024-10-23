@@ -16,15 +16,6 @@ class_names = CLASS_LABELS_200
 num_classes = 200
 segment_ignore_index = (-1, 0, 2)
 
-hooks = [
-    dict(type="CheckpointLoader", keywords="backbone.conv_input.0.weight", replacement=""),
-    dict(type="IterationTimer", warmup_iter=2),
-    dict(type="InformationWriter"),
-    dict(type="SemSegEvaluator"),
-    dict(type="CheckpointSaver", save_freq=None),
-    dict(type="PreciseEvaluator", test_last=False),
-]
-
 # model settings
 model = dict(
     type="PG-v1m1",
@@ -167,7 +158,8 @@ data = dict(
 )
 
 hooks = [
-    dict(type="CheckpointLoader", keywords="module.", replacement="module."),
+    # dict(type="CheckpointLoader", keywords="module.", replacement="module."),
+    dict(type="CheckpointLoader", keywords="backbone.conv_input.0.weight", replacement=""),
     dict(type="IterationTimer", warmup_iter=2),
     dict(type="InformationWriter"),
     dict(

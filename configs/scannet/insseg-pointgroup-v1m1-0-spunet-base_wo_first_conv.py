@@ -8,15 +8,6 @@ empty_cache = False
 enable_amp = True
 evaluate = True
 
-hooks = [
-    dict(type="CheckpointLoader", keywords="backbone.conv_input.0.weight", replacement=""),
-    dict(type="IterationTimer", warmup_iter=2),
-    dict(type="InformationWriter"),
-    dict(type="SemSegEvaluator"),
-    dict(type="CheckpointSaver", save_freq=None),
-    dict(type="PreciseEvaluator", test_last=False),
-]
-
 class_names = [
     "wall",
     "floor",
@@ -184,7 +175,8 @@ data = dict(
 )
 
 hooks = [
-    dict(type="CheckpointLoader", keywords="module.", replacement="module."),
+    # dict(type="CheckpointLoader", keywords="module.", replacement="module."),
+    dict(type="CheckpointLoader", keywords="backbone.conv_input.0.weight", replacement=""),
     dict(type="IterationTimer", warmup_iter=2),
     dict(type="InformationWriter"),
     dict(
